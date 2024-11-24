@@ -1,0 +1,31 @@
+// Specify the Protocol Buffers version being used
+syntax = "proto3";
+
+// Service definition for managing customer data
+service CustomerService {
+    // RPC's to define wat we get and wat we return
+
+    rpc GetAll (Empty) returns (CustomerList) {}
+    rpc Get (CustomerRequestId) returns (Customer) {}
+    rpc Insert (Customer) returns (Customer) {}
+    rpc Update (Customer) returns (Customer) {}
+    rpc Remove (CustomerRequestId) returns (Empty) {}
+}
+
+//wat does empty mean in above RPC is defined here
+message Empty {}
+
+message CustomerRequestId {
+    string id = 1; // Unique identifier for the customer, never change this number
+}
+
+message CustomerList {
+    repeated Customer customers = 1; // List of customers
+}
+
+message Customer {
+    string id = 1;       // Unique identifier for the customer
+    string name = 2;     // Full name of the customer
+    int32 age = 3;       // Age of the customer
+    string address = 4;  // Address of the customer
+}
